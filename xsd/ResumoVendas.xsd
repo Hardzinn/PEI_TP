@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns="http://www.TPPEI2024.pt/ResumoVendas"
+    targetNamespace="http://www.TPPEI2024.pt/ResumoVendas">
+    
+    <xs:complexType name="TipoNumeroVendasCategoria">
+        <xs:sequence>
+            <xs:element name="Categoria" type="xs:string"/>
+            <xs:element name="NumeroVendas" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TipoResumoVendas">
+        <xs:sequence>
+            <xs:element name = "NumeroDeClientesDiferentes" type="xs:int"/>
+            <xs:element name = "NumeroDeProdutosDiferentes" type="xs:int"/>
+            <xs:element name = "NumeroTotalDeVendas" type="xs:int"/>
+   
+            <xs:element name = "VendasPorCategoria" type="TipoNumeroVendasCategoria" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+    
+

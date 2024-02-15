@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="http://www.TPPEI2024.pt/Vendas"
+    xmlns="http://www.TPPEI2024.pt/Vendas"
+    elementFormDefault="qualified"
+    xmlns:k="http://www.TPPEI2024.pt/InformacoesGerais"
+    xmlns:l="http://www.TPPEI2024.pt/Produtos"
+    xmlns:i="http://www.TPPEI2024.pt/TipoVendas"
+    xmlns:j="http://www.TPPEI2024.pt/ResumoVendas"
+    xmlns:q="http://www.TPPEI2024.pt/Clientes"
+    >
+    
+    <xs:import namespace = "http://www.TPPEI2024.pt/InformacoesGerais" schemaLocation="InformacoesGerais.xsd"/>
+    <xs:import namespace = "http://www.TPPEI2024.pt/Produtos" schemaLocation="Produtos.xsd"/>
+    <xs:import namespace = "http://www.TPPEI2024.pt/ResumoVendas" schemaLocation="ResumoVendas.xsd"/>
+    <xs:import namespace = "http://www.TPPEI2024.pt/TipoVendas" schemaLocation="TipoVendas.xsd"/>
+    <xs:import namespace = "http://www.TPPEI2024.pt/Clientes" schemaLocation="Clientes.xsd"/>
+    <!-- Definição do elemento raiz para devoluções -->
+    
+    
+    <xs:element name="Vendas" >
+        <xs:complexType>
+            <xs:sequence>
+                <!-- Informação geral -->
+                <xs:element name="InformacaoGeral" type= "k:TipoInformacoesGerais"/>
+                   
+                <xs:element name="Cliente">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Cliente" type="q:tipoCliente" maxOccurs="unbounded" />    
+                        </xs:sequence>     
+                    </xs:complexType>
+                </xs:element>
+                
+                <!-- Lista de produtos -->
+                <xs:element name="Produtos">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Produtos" type="l:TipoProdutosCategorizacao"  minOccurs="0" maxOccurs="unbounded"/>         
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <!-- Informação de Venda -->
+                <xs:element name="Venda">
+                    <!-- Definir subelementos para dados da fatura -->
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Vendas" type="i:TipoFatura" minOccurs="0" maxOccurs="unbounded"/>         
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <!-- Informação resumida -->
+                <xs:element name="ResumoVendas" type="j:TipoResumoVendas" minOccurs ="0"/>
+      
+                
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+             
+</xs:schema>

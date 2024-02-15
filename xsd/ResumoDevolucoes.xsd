@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    elementFormDefault="qualified"
+    xmlns="http://www.TPPEI2024.pt/ResumoDevulocoes"
+    targetNamespace="http://www.TPPEI2024.pt/ResumoDevulocoes"
+    xmlns:s="http://www.TPPEI2024.pt/Produtos">
+    
+    <xs:import namespace = "http://www.TPPEI2024.pt/Produtos" schemaLocation="Produtos.xsd"/>
+    
+    <xs:complexType name="TipoNumeroDevolucoesCategoria">
+        <xs:sequence>
+            <xs:element name="Categoria" type="xs:string"/>
+            <xs:element name="NumeroDevolucoes" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TipoResumoDevolucoes">
+        <xs:sequence>
+            <xs:element name = "NumeroDeProdutosDiferentes" type="xs:integer"/>
+            <xs:element name = "DevolucoesPorCategoria" type="TipoNumeroDevolucoesCategoria" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+ 
+   
+</xs:schema>

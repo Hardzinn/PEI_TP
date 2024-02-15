@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    elementFormDefault="qualified"
+    xmlns="http://www.TPPEI2024.pt/InformacoesGerais"
+    targetNamespace="http://www.TPPEI2024.pt/InformacoesGerais">
+    
+
+    <!-- Informação geral -->
+    <xs:complexType name="TipoInformacoesGerais">
+        <!-- Definir subelementos para NIF, nome, morada, ano fiscal, mês -->
+            <xs:sequence>
+                <xs:element name = "NIF" type="xs:positiveInteger"/>
+                <xs:element name = "Nome" type="xs:string"/>
+                <xs:element name = "Morada" type="xs:string"/>
+                <xs:element name = "AnoFiscal" type="xs:gYear"/>
+                <xs:element name = "MesDocumento" type="xs:gMonth"/>
+            </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    elementFormDefault="qualified"
+    xmlns="http://www.TPPEI2024.pt/TipoDevolucoes"
+    targetNamespace="http://www.TPPEI2024.pt/TipoDevolucoes">
+    
+    
+
+    <xs:complexType name="TipoFatura">
+        <xs:sequence>
+            <xs:element name = "IDFatura" type="xs:string"/>
+            <xs:element name = "DataFatura" type="xs:dateTime"/>
+            <xs:element name = "DiasDevolucao" type="xs:integer"/>
+            <xs:element name = "DevolucaoPrecoce" type="EarlyReturn"/> 
+            
+            <xs:element name="ListaProdutos">
+                <xs:complexType>
+                   <xs:sequence>
+                       <xs:element name="Product" maxOccurs="unbounded">
+                           <xs:complexType>
+                               <xs:sequence>
+                                  <xs:element name = "ProdutoId" type="xs:positiveInteger"/>       
+                               </xs:sequence>
+                           </xs:complexType>
+                       </xs:element>
+                   </xs:sequence>
+              </xs:complexType>
+           </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="EarlyReturn">
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    
+</xs:schema>

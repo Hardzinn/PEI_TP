@@ -1,0 +1,31 @@
+db.Sales_Header.aggregate([
+  {
+    $lookup: {
+      from: "Sales_Lines",
+      localField: "invoice_id",
+      foreignField: "invoice_id",
+      as: "invoice_lines"
+    }
+  },
+{
+    $lookup: {
+      from: "Valor_Total_Linhas",
+      localField: "invoice_id",
+      foreignField: "invoice_id",
+      as: "total_value"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      invoice_id: "$invoice_id",
+      date: "$date",
+      customer_id: "$customer_id",
+      total_value:"$total_value.total_with_vat_sum",
+      sales_lines: "$invoice_lines"
+    }
+  },
+  {
+    $out: "Vendas"
+  }
+]);

@@ -1,0 +1,65 @@
+db.Clients.aggregate([
+  {
+      $lookup: {
+          from: "Address",
+          localField: "address_id",
+          foreignField: "address_id",
+          as: "address"
+      }
+  },
+  {
+      $unwind: "$address"
+  },
+  {
+      $lookup: {
+          from: "City",
+          localField: "address.city_id",
+          foreignField: "city_id",
+          as: "city"
+      }
+  },
+  {
+      $unwind: "$city"
+  },
+  {
+      $lookup: {
+          from: "Country",
+          localField: "city.country_id",
+          foreignField: "country_id",
+          as: "country"
+      }
+  },
+  {
+      $unwind: "$country"
+  },
+  {
+      $project: {
+          client_id: "$id",
+          client: {
+              first_name: "$first_name",
+              last_name: "$last_name",
+              email: "$email",
+              ative: "$ative",
+              create_date: "$create_date",
+              address: {
+                address_id: "$address.address_id",
+                address: "$address.address",
+                address2: "$address.address2",
+                district: "$address.district",
+                city: {
+                    city_id: "$city.city_id",
+                    city: "$city.city",
+                    country: {
+                        country_id: "$country.country_id",
+                        country: "$country.country"
+                    }
+                },
+                postal_code: "$address.postal_code",
+              },
+          }
+      }
+  },
+  {
+      $out: "Clientes"
+  }
+]);

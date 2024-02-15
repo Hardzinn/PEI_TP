@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns="http://www.TPPEI2024.pt/Produtos" targetNamespace="http://www.TPPEI2024.pt/Produtos">
+
+    <xs:simpleType name="GamaPrecos">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Budget"/>
+            <xs:enumeration value="Mid-Range"/>
+            <xs:enumeration value="High-End"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="Desempenho">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Basic"/>
+            <xs:enumeration value="Standard"/>
+            <xs:enumeration value="High"/>
+            <xs:enumeration value="Gaming"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="QualidadeCamera">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Basic"/>
+            <xs:enumeration value="Good"/>
+            <xs:enumeration value="Pro"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ScreenSize">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Small"/>
+            <xs:enumeration value="Medium"/>
+            <xs:enumeration value="Large"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="BatteryCapacity">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Short"/>
+            <xs:enumeration value="Average"/>
+            <xs:enumeration value="Long"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Armazenamento">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Low"/>
+            <xs:enumeration value="Medium"/>
+            <xs:enumeration value="High"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:complexType name="TipoProdutosCategorizacao">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:int"/>
+            <xs:element name="Marca" type="xs:string"/>
+            <xs:element name="Modelo" type="xs:string"/>
+            <xs:element name="Preco" type="xs:float"/>
+            <xs:element name="GamaDePrecos" type="GamaPrecos"/>
+            <xs:element name="Desempenho" type="Desempenho"/>
+            <xs:element name="QualidadeDaCamaraFrontal" type="QualidadeCamera"/>
+            <xs:element name="TamanhoDoEcra" type="ScreenSize"/>
+            <xs:element name="CapacidadeDaBateria" type="BatteryCapacity" minOccurs = "0" />
+            <xs:element name="CapacidadeDeArmazenamento" type="Armazenamento"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+
+</xs:schema>

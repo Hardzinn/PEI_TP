@@ -1,0 +1,32 @@
+db.Devoluções.aggregate([
+  {
+    $lookup: {
+      from: "Vendas",
+      localField: "invoice_id",
+      foreignField: "invoice_id",
+      as: "venda"
+    }
+  },
+  {
+    $unwind: "$venda"
+  },
+  {
+    $project: {
+      _id: 1,
+      produtos: 1,
+      date: 1,
+      invoice_id: 1,
+      dias_entre_venda_e_devolucao: {
+        $divide: [
+          {
+            $subtract: ["$date", "$venda.date"]
+          },
+          24 * 60 * 60 * 1000 // Convertendo a diferença de milissegundos para dias
+        ]
+      }
+    }
+  },
+  {
+    $out: "NovaDevolucoes"
+  }
+])

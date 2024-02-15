@@ -1,0 +1,24 @@
+db.Vendas.aggregate([
+  {
+    $match: {
+      date: { $gte: new Date(new Date().setFullYear(new Date().getFullYear() - 3)) }
+    }
+  },
+  {
+    $group: {
+      _id: "$customer_id",
+      numero_de_compras: { $sum: 1 },
+      valor_total_compras: { $sum: "$total_value" }
+    }
+  }
+]).forEach(function (result) {
+  db.Clientes.update(
+    { client_id: result._id },
+    {
+      $set: {
+        numero_de_compras: result.numero_de_compras,
+        valor_total_compras: result.valor_total_compras
+      }
+    }
+  );
+});

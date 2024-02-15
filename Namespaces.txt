@@ -1,0 +1,10 @@
+Relatório de Devoluções
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.TPPEI2024.pt/Devolucoes Devolucoes.xsd"
+    xmlns="http://www.TPPEI2024.pt/Devolucoes"
+
+
+Relatório de Vendas:
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.TPPEI2024.pt/Vendas Vendas.xsd"
+    xmlns="http://www.TPPEI2024.pt/Vendas"

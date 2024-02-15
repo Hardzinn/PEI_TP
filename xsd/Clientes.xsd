@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns="http://www.TPPEI2024.pt/Clientes"
+    targetNamespace="http://www.TPPEI2024.pt/Clientes">
+    
+    <!-- Definir o tipo enumerado para TipoCliente -->
+    <xs:simpleType name="TipoClienteEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="novo"/>
+            <xs:enumeration value="regular"/>
+            <xs:enumeration value="premium"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name= "tipoCliente">
+        <xs:sequence>
+            <!-- Informações sobre o cliente -->
+            <xs:element name="ID" type="xs:string"/>
+            <xs:element name="PrimeiroNome" type="xs:string"/>
+            <xs:element name="UltimoNome" type="xs:string"/>
+            <xs:element name="Email" type="xs:string" default="desconhecido"/>
+            <xs:element name="Morada">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Pais" type="xs:string"/>
+                        <xs:element name="Cidade" type="xs:string"/>
+                        <xs:element name="CodigoPostal" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="TipoCliente" type="TipoClienteEnum"/>
+            <xs:element name="ComprasNosUltimos3Anos" type="xs:positiveInteger"/>
+            <xs:element name="ValorTotalCompras" type="xs:float"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

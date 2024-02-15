@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="http://www.TPPEI2024.pt/Devolucoes"
+    xmlns="http://www.TPPEI2024.pt/Devolucoes"
+    elementFormDefault="qualified"
+    xmlns:k="http://www.TPPEI2024.pt/InformacoesGerais"
+    xmlns:l="http://www.TPPEI2024.pt/Produtos"
+    xmlns:p="http://www.TPPEI2024.pt/TipoDevolucoes"
+    xmlns:o="http://www.TPPEI2024.pt/ResumoDevulocoes"
+    >
+     
+    <xs:import namespace = "http://www.TPPEI2024.pt/InformacoesGerais" schemaLocation="InformacoesGerais.xsd"/>
+    <xs:import namespace = "http://www.TPPEI2024.pt/Produtos" schemaLocation="Produtos.xsd"/>
+    <xs:import namespace = "http://www.TPPEI2024.pt/TipoDevolucoes" schemaLocation="TipoDevolucoes.xsd"/>
+    <xs:import namespace = "http://www.TPPEI2024.pt/ResumoDevulocoes" schemaLocation="ResumoDevolucoes.xsd"/>
+    
+    <!-- Definição do elemento raiz para devoluções -->
+    <xs:element name="Devolucoes">
+        <xs:complexType>
+            <xs:sequence>
+                <!-- Informação geral -->
+                <xs:element name="InformacaoGeral" type= "k:TipoInformacoesGerais"/>  
+                
+                <!-- Lista de produtos -->
+                <xs:element name="Produtos">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <!-- Definir subelementos para produto, incluindo código, marca, modelo, preço e categorias -->
+                            <xs:element name="Produtos" type="l:TipoProdutosCategorizacao" minOccurs="1" maxOccurs="unbounded"/>         
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <!-- Informação de Devolução -->
+                <xs:element name="Devolucao">              
+                    <xs:complexType>
+                        <xs:sequence>
+                            <!-- Produtos Devolvidos -->
+                            <xs:element name ="Devolucoes" type="p:TipoFatura" minOccurs="0" maxOccurs="unbounded"/>
+                                
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            
+                
+                <xs:element name ="ResumoDevolucoes" type="o:TipoResumoDevolucoes" minOccurs ="0"/>
+                
+            </xs:sequence>
+            </xs:complexType>
+    </xs:element>
+</xs:schema> 

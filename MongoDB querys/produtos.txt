@@ -1,0 +1,52 @@
+db.Product.aggregate([
+  {
+    $lookup: {
+      from: "Sub_Category_Product",
+      localField: "id",
+      foreignField: "product_id",
+      as: "sub_category_product"
+    }
+  },
+  {
+    $lookup: {
+      from: "Sub_Category",
+      localField: "sub_category_product.sub_category_id",
+      foreignField: "id",
+      as: "sub_category"
+    }
+  },
+  {
+    $addFields: {
+      "sub_category_name": {
+        $switch: {
+          branches: [
+            { case: { $in: ["$sub_category.name", ["Budget", "Mid-Range", "High-End"]] }, then: "$sub_category.name" },
+            { case: { $in: ["$sub_category.name", ["Basic", "Standard", "High", "Gaming"]] }, then: "$sub_category.name" },
+            { case: { $in: ["$sub_category.name", ["Basic", "Good", "Pro"]] }, then: "$sub_category.name" },
+            { case: { $in: ["$sub_category.name", ["Small", "Medium", "Large"]] }, then: "$sub_category.name" },
+            { case: { $in: ["$sub_category.name", ["Short", "Average", "Long"]] }, then: "$sub_category.name" },
+            { case: { $in: ["$sub_category.name", ["Low", "Medium", "High"]] }, then: "$sub_category.name" }
+          ],
+          default: "$sub_category.name"
+        }
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      product_id: "$id",
+      product: {
+        list_price: "$list_price",
+        brand: "$brand",
+        model: "$model",
+        sub_category: {
+          name: "$sub_category_name"
+        }
+      }
+    }
+  },
+  {
+    $out: "Produtos"
+  }
+]);

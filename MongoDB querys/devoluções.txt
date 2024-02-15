@@ -1,0 +1,26 @@
+const pipeline = [
+  {
+    $group: {
+      _id: "$invoice_id",
+      produtos: {
+        $push: {
+          product_id: "$product_id",
+        }
+      },
+      date: { $first: "$date" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      invoice_id: "$_id",
+      produtos: 1,
+      date: 1
+    }
+  },
+  {
+    $out: "devolucoes"
+  }
+];
+
+db.Returns.aggregate(pipeline);

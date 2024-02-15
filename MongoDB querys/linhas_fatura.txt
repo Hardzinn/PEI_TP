@@ -1,0 +1,25 @@
+db.Sales_Lines.aggregate([
+  {
+      $lookup: {
+          from: "Produtos",
+          localField: "product_id",
+          foreignField: "product_id",
+          as: "product"
+      }
+  },
+  {
+      $unwind:"$product"
+  },
+  {
+      $project: {
+          id: "$id",
+          invoice_id: "$invoice_id",
+          quantity: "$quantity",
+          total_with_vat: "$total_with_vat",
+          product: "$product.product_id"
+      }
+  },
+  {
+      $out: "Linhas_Fatura"
+  }
+]);

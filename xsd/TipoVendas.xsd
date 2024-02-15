@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns="http://www.TPPEI2024.pt/TipoVendas"
+    targetNamespace="http://www.TPPEI2024.pt/TipoVendas">
+    
+    
+    <xs:complexType name="TipoFatura">
+        <xs:sequence>
+            <xs:element name="CodigoFatura" type="xs:string"/>
+            <xs:element name="DataVenda" type="xs:dateTime"/>
+            <xs:element name="CodigoCliente" type="xs:string"/>
+            <xs:element name="ValorTotalVenda" type="xs:decimal"/>
+            <xs:element name="LinhasVenda">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="LinhaVenda" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="NumeroLinha" type="xs:integer"/>
+                                    <xs:element name="CodigoProduto" type="xs:string"/>
+                                    <xs:element name="Quantidade" type="xs:integer"/>
+                                    <xs:element name="ValorTotalLinha" type="xs:decimal"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
